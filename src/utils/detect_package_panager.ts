@@ -13,9 +13,9 @@ const detectPackageManager = async (): Promise<PackageManager> => {
     if (await exists(lockFile)) return packageManager as PackageManager
   }
 
-  console.error('No package manager found')
+  console.error('No or unknown package manager detected')
   console.error(
-    'Please run this command in the root of your project with a package manager lock file',
+    'Please run this command in the root of your project with a supported package manager lock file',
   )
   process.exit(1)
 }
