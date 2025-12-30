@@ -2,10 +2,18 @@ import { access } from 'node:fs/promises'
 import { join } from 'node:path'
 import type PackageManager from '../types/package_manager'
 
+const lockFileForPackageManager: Record<PackageManager, string> = {
+  pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
+  npm: 'package-lock.json',
+}
+
 const detectPackageManager = async (): Promise<PackageManager> => {
-  if (await exists('pnpm-lock.yaml')) return 'pnpm'
-  if (await exists('yarn.lock')) return 'yarn'
-  if (await exists('package-lock.json')) return 'npm'
+  for (const [packageManager, lockFile] of Object.entries(
+    lockFileForPackageManager,
+  )) {
+    if (await exists(lockFile)) return packageManager as PackageManager
+  }
 
   console.error('No package manager found')
   console.error(
