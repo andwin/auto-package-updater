@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { checkbox, Separator } from '@inquirer/prompts'
 import commandLineArgs from 'command-line-args'
 import type Update from './types/update'
 import detectPackageManager from './utils/detect_package_panager'
@@ -40,6 +41,8 @@ const run = async () => {
   console.log('packages', packages)
   console.log('maxVersionDiff', maxVersionDiff)
 
+  const choices = []
+
   for (const workspace of filteredWorkspaces) {
     console.log('listing updates for workspace', workspace)
     const updates = await listUpdatesForWorkspace(workspace, packageManager)
@@ -58,7 +61,23 @@ const run = async () => {
     for (const update of filteredUpdates) {
       console.log(update.name, update.value.diff)
     }
+
+    choices.push(new Separator(workspace.name))
+    choices.push(
+      ...filteredUpdates.map((update) => ({
+        name: update.name,
+        value: update,
+      })),
+    )
   }
+
+  const updatesToApply = await checkbox({
+    message: 'Select updates to apply',
+    choices: choices,
+    pageSize: 20,
+  })
+
+  console.log('updatesToApply', updatesToApply)
 }
 
 run()
