@@ -7,8 +7,10 @@ const filterUpdates = (
   packages: string[] | undefined = [],
   maxVersionDiff: VersionDiff | undefined,
 ): Update[] => {
+  let filteredUpdates = [...updates]
+
   if (maxVersionDiff) {
-    return updates.filter((update) => {
+    filteredUpdates = filteredUpdates.filter((update) => {
       return (
         versionDiffValues[update.value.diff as VersionDiff] >=
         versionDiffValues[maxVersionDiff]
@@ -16,9 +18,13 @@ const filterUpdates = (
     })
   }
 
-  if (!packages.length) return updates
+  if (packages.length) {
+    filteredUpdates = filteredUpdates.filter((update) =>
+      packages.includes(update.value.pkg),
+    )
+  }
 
-  return updates.filter((update) => packages.includes(update.value.pkg))
+  return filteredUpdates
 }
 
 export default filterUpdates

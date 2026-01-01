@@ -274,3 +274,48 @@ test('returns all updates when max version diff is set to major', () => {
 
   expect(result).toEqual(expected)
 })
+
+test('filter updates by both package names and max version diff', () => {
+  const updates: Update[] = [
+    {
+      name: 'vitest 3.2.4 => 4.0.16 (major)',
+      value: {
+        pkg: 'vitest',
+        workspace: { name: 'root', root: true },
+        diff: 'major',
+      },
+    },
+    {
+      name: 'zod 4.1.13 => 4.3.2 (minor)',
+      value: {
+        pkg: 'zod',
+        workspace: { name: 'root', root: true },
+        diff: 'minor',
+      },
+    },
+    {
+      name: 'sass 1.96.0 => 1.96.1 (patch)',
+      value: {
+        pkg: 'sass',
+        workspace: { name: 'root', root: true },
+        diff: 'patch',
+      },
+    },
+  ]
+  const packages = ['vitest', 'sass']
+  const maxVersionDiff = 'minor'
+  const expected = [
+    {
+      name: 'sass 1.96.0 => 1.96.1 (patch)',
+      value: {
+        pkg: 'sass',
+        workspace: { name: 'root', root: true },
+        diff: 'patch',
+      },
+    },
+  ]
+
+  const result = filterUpdates(updates, packages, maxVersionDiff)
+
+  expect(result).toEqual(expected)
+})
