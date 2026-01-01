@@ -7,8 +7,12 @@ import type Workspace from '../types/workspace'
 const listUpdatesForWorkspaceForPnpm = async (
   workspace: Workspace,
 ): Promise<Update[]> => {
-  const result =
-    await execa`pnpm outdated --json --filter ${workspace.name}`.catch((e) => e)
+  const result = await execa('pnpm', [
+    'outdated',
+    '--json',
+    '--filter',
+    workspace.name,
+  ]).catch((e) => e)
 
   let jsonOutput: Record<
     string,
