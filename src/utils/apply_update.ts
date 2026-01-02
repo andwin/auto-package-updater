@@ -10,7 +10,7 @@ const applyUpdateForPnpm = async (update: Update): Promise<void> => {
     args.push('--filter', update.workspace.name)
   }
 
-  args.push('add', `${update.packageName}@latest`, '-E')
+  args.push('add', `${update.packageName}@${update.latestVersion}`, '-E')
 
   await execa('pnpm', args)
 }
