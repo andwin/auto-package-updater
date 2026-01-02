@@ -10,6 +10,7 @@ import filterWorkspaces from './utils/filter_workspaces'
 import installPackagesBeforeUpdate from './utils/install_packages_before_update'
 import listUpdatesForWorkspace from './utils/list_updates_for_workspace'
 import listWorkspaces from './utils/list_workspaces'
+import rollbackUpdate from './utils/rollback_update'
 import runTests from './utils/run_tests'
 import verifyGitRepo from './utils/verify_git_repo'
 import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
@@ -91,6 +92,8 @@ const run = async () => {
       await runTests(packageManager)
     } catch (e) {
       console.error((e as Error).message)
+      console.log('rolling back update')
+      await rollbackUpdate(packageManager)
       continue
     }
     console.log('update applied successfully', update.name)
