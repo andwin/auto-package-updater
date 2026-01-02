@@ -26,7 +26,11 @@ const applyUpdate = async (
   packageManager: PackageManager,
   update: Update,
 ): Promise<void> => {
-  await implementationForPackageManager[packageManager](update)
+  try {
+    await implementationForPackageManager[packageManager](update)
+  } catch {
+    throw new Error('Failed to apply update')
+  }
 }
 
 export default applyUpdate

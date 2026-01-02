@@ -13,7 +13,12 @@ const implementationForPackageManager: Record<
 }
 
 const runTests = async (packageManager: PackageManager) => {
-  await implementationForPackageManager[packageManager]()
+  try {
+    await implementationForPackageManager[packageManager]()
+  } catch (e) {
+    console.error(e as Error)
+    throw new Error('Tests failed')
+  }
 }
 
 export default runTests

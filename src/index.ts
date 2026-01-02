@@ -84,10 +84,16 @@ const run = async () => {
 
   console.log('updatesToApply', updatesToApply)
   for (const update of updatesToApply) {
-    console.log('applying update', update.name)
-    await applyUpdate(packageManager, update)
-    console.log('running tests')
-    await runTests(packageManager)
+    try {
+      console.log('applying update', update.name)
+      await applyUpdate(packageManager, update)
+      console.log('running tests')
+      await runTests(packageManager)
+    } catch (e) {
+      console.error((e as Error).message)
+      continue
+    }
+    console.log('update applied successfully', update.name)
   }
 }
 
