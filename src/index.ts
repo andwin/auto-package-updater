@@ -55,7 +55,7 @@ const run = async () => {
     const updates = await listUpdatesForWorkspace(workspace, packageManager)
     console.log('Updates', updates.length)
     for (const update of updates) {
-      console.log(update.name, update.value.diff)
+      console.log(update.packageName, update.versionDiff)
     }
     let filteredUpdates: Update[]
     try {
@@ -66,7 +66,7 @@ const run = async () => {
     }
     console.log('Filtered updates', filteredUpdates.length)
     for (const update of filteredUpdates) {
-      console.log(update.name, update.value.diff)
+      console.log(update.packageName, update.versionDiff)
     }
 
     if (workspace.name) {
@@ -74,7 +74,7 @@ const run = async () => {
     }
     choices.push(
       ...filteredUpdates.map((update) => ({
-        name: update.name,
+        name: `${update.packageName} ${update.currentVersion} => ${update.latestVersion} (${update.versionDiff})`,
         value: update,
       })),
     )
@@ -89,7 +89,7 @@ const run = async () => {
   console.log('updatesToApply', updatesToApply)
   for (const update of updatesToApply) {
     try {
-      console.log('applying update', update.name)
+      console.log('Updating package', update.packageName)
       await applyUpdate(packageManager, update)
       console.log('running tests')
       await runTests(packageManager)

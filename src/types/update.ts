@@ -1,12 +1,11 @@
 import type Workspace from './workspace'
 
 type Update = {
-  name: string
-  value: {
-    pkg: string
-    workspace: Workspace
-    diff: string
-  }
+  packageName: string
+  workspace: Workspace
+  versionDiff: string
+  currentVersion: string
+  latestVersion: string
 }
 
 export default Update

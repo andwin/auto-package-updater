@@ -4,13 +4,13 @@ import type Update from '../types/update'
 
 const applyUpdateForPnpm = async (update: Update): Promise<void> => {
   const args: string[] = []
-  if (update.value.workspace.root) {
+  if (update.workspace.root) {
     args.push('-w')
-  } else if (update.value.workspace.name) {
-    args.push('--filter', update.value.workspace.name)
+  } else if (update.workspace.name) {
+    args.push('--filter', update.workspace.name)
   }
 
-  args.push('add', `${update.value.pkg}@latest`, '-E')
+  args.push('add', `${update.packageName}@latest`, '-E')
 
   await execa('pnpm', args)
 }

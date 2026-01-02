@@ -2,9 +2,9 @@ import { execa } from 'execa'
 import type Update from '../types/update'
 
 const commitUpdate = async (update: Update) => {
-  let message = `Updating package ${update.value.pkg}`
-  if (update.value.workspace.name) {
-    message += `  in ${update.value.workspace.name}`
+  let message = `Updating package ${update.packageName}`
+  if (update.workspace.name) {
+    message += ` in ${update.workspace.name}`
   }
 
   await execa('git', ['add', '--all'])

@@ -28,20 +28,29 @@ const listUpdatesForWorkspaceForPnpm = async (
   }
 
   const updates = Object.entries(jsonOutput)
-    .map(([pkg, value]) => {
-      const { current, latest, isDeprecated } = value
+    .map(([packageName, value]) => {
+      const {
+        current: currentVersion,
+        latest: latestVersion,
+        isDeprecated,
+      } = value
       if (isDeprecated) return undefined
 
       try {
-        const diff = semver.diff(current, latest)
-        return {
-          name: `${pkg} ${current} => ${latest} (${diff})`,
-          value: { pkg, workspace, diff },
+        const versionDiff =
+          semver.diff(currentVersion, latestVersion) ?? 'unknown'
+        const update: Update = {
+          packageName,
+          workspace,
+          versionDiff,
+          currentVersion,
+          latestVersion,
         }
+        return update
       } catch (e) {
         console.error(
           'Exception parsing semver diff for package ' +
-            pkg +
+            packageName +
             ' is the package installed?',
         )
         console.error(e)

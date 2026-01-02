@@ -12,7 +12,7 @@ const filterUpdates = (
   if (maxVersionDiff) {
     filteredUpdates = filteredUpdates.filter((update) => {
       return (
-        versionDiffValues[update.value.diff as VersionDiff] >=
+        versionDiffValues[update.versionDiff as VersionDiff] >=
         versionDiffValues[maxVersionDiff]
       )
     })
@@ -20,7 +20,7 @@ const filterUpdates = (
 
   if (packages.length) {
     filteredUpdates = filteredUpdates.filter((update) =>
-      packages.includes(update.value.pkg),
+      packages.includes(update.packageName),
     )
   }
 
