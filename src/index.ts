@@ -13,6 +13,7 @@ import listWorkspaces from './utils/list_workspaces'
 import verifyGitRepo from './utils/verify_git_repo'
 import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
 import verifyPristineState from './utils/verify_pristine_state'
+import runTests from './utils/run_tests'
 
 const commandLineArgsDefinitions = [
   { name: 'filter', type: String, multiple: true },
@@ -84,6 +85,7 @@ const run = async () => {
   console.log('updatesToApply', updatesToApply)
   for (const update of updatesToApply) {
     await applyUpdate(packageManager, update)
+    await runTests(packageManager)
   }
 }
 
