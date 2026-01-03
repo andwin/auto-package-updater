@@ -1,11 +1,11 @@
 import { execa } from 'execa'
 import type PackageManager from '../types/package_manager'
-import installPackagesBeforeUpdate from './install_packages_before_update'
+import installPackages from './install_packages'
 
 const rollbackUpdate = async (packageManager: PackageManager) => {
   await execa`git checkout .`
 
-  await installPackagesBeforeUpdate(packageManager)
+  await installPackages(packageManager)
 }
 
 export default rollbackUpdate

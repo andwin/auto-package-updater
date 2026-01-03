@@ -1,7 +1,7 @@
 import { execa } from 'execa'
 import type PackageManager from '../types/package_manager'
 
-const installPackagesBeforeUpdateForPnpm = async () => {
+const installPackagesForPnpm = async () => {
   await execa`pnpm install`
 }
 
@@ -9,11 +9,11 @@ const implementationForPackageManager: Record<
   PackageManager,
   () => Promise<void>
 > = {
-  pnpm: installPackagesBeforeUpdateForPnpm,
+  pnpm: installPackagesForPnpm,
 }
 
-const installPackagesBeforeUpdate = async (packageManager: PackageManager) => {
+const installPackages = async (packageManager: PackageManager) => {
   await implementationForPackageManager[packageManager]()
 }
 
-export default installPackagesBeforeUpdate
+export default installPackages
