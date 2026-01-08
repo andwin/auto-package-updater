@@ -143,6 +143,7 @@ const run = async () => {
       if (error.stdout) {
         logMessage += `\n\n${error.stdout}`
       }
+      logMessage += `\n\n`
       await fs.appendFile(logfile, logMessage)
 
       console.log('rolling back update')
