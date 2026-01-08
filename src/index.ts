@@ -13,7 +13,7 @@ import installPackagesBeforeUpdate from './utils/install_packages'
 import listUpdatesForWorkspace from './utils/list_updates_for_workspace'
 import listWorkspaces from './utils/list_workspaces'
 import rollbackUpdate from './utils/rollback_update'
-import runCustomCommand from './utils/run_custom_command'
+import runCommand from './utils/run_command'
 import runTests from './utils/run_tests'
 import verifyGitRepo from './utils/verify_git_repo'
 import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
@@ -127,7 +127,7 @@ const run = async () => {
 
       if (customCommands.test) {
         console.log('running custom test command')
-        await runCustomCommand(customCommands.test)
+        await runCommand(customCommands.test)
       } else {
         console.log('running tests')
         await runTests(packageManager)
