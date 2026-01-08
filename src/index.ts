@@ -23,7 +23,7 @@ const commandLineArgsDefinitions = [
   { name: 'workspace', type: String, multiple: true },
   { name: 'package', type: String, multiple: true },
   { name: 'max-version-diff', type: String },
-  { name: 'test-command', type: String },
+  { name: 'test', type: String },
 ]
 
 const commandLineArguments = commandLineArgs(commandLineArgsDefinitions)
@@ -34,7 +34,7 @@ const filter = {
   maxVersionDiff: commandLineArguments['max-version-diff'],
 }
 const customCommands = {
-  test: commandLineArguments['test-command'],
+  test: commandLineArguments.test,
 }
 
 const logfile = 'auto-package-updater.log'
