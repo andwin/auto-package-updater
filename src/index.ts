@@ -136,8 +136,9 @@ const run = async () => {
       const error = e as Error & { stdout?: string }
       console.error(error.message)
       let logMessage = `❌ Updating ${update.packageName} in ${update.workspace.name} failed`
+      logMessage += `\n\n${error.message}`
       if (error.stdout) {
-        logMessage += `\n\n\n ${error.stdout}`
+        logMessage += `\n\n${error.stdout}`
       }
       await fs.appendFile(logfile, logMessage)
 
