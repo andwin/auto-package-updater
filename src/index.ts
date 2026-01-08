@@ -133,10 +133,13 @@ const run = async () => {
         await runTests(packageManager)
       }
     } catch (e) {
-      const error = e as Error & { stdout?: string }
+      const error = e as Error & { stdout?: string; stderr?: string }
       console.error(error.message)
       let logMessage = `❌ Updating ${update.packageName} in ${update.workspace.name} failed`
       logMessage += `\n\n${error.message}`
+      if (error.stderr) {
+        logMessage += `\n\n${error.stderr}`
+      }
       if (error.stdout) {
         logMessage += `\n\n${error.stdout}`
       }
