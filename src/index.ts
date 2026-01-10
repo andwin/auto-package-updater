@@ -24,6 +24,7 @@ const commandLineArgsDefinitions = [
   { name: 'package', type: String, multiple: true },
   { name: 'max-version-diff', type: String },
   { name: 'test', type: String },
+  { name: 'pre-update', type: String },
 ]
 
 const commandLineArguments = commandLineArgs(commandLineArgsDefinitions)
@@ -35,6 +36,7 @@ const filter = {
 }
 const customCommands = {
   test: commandLineArguments.test,
+  preUpdate: commandLineArguments['pre-update'],
 }
 
 const logfile = 'auto-package-updater.log'
@@ -127,6 +129,12 @@ const run = async () => {
         update.packageName,
         update.workspace.name ? `in ${update.workspace.name}` : '',
       )
+
+      if (customCommands.preUpdate) {
+        console.log('running custom pre-update command')
+        await runCommand(customCommands.preUpdate)
+      }
+
       await applyUpdate(packageManager, update)
 
       if (customCommands.test) {
