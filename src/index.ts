@@ -20,9 +20,9 @@ import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
 import verifyPristineState from './utils/verify_pristine_state'
 
 const commandLineArgsDefinitions = [
-  { name: 'workspace', type: String, multiple: true },
-  { name: 'package', type: String, multiple: true },
-  { name: 'max-version-diff', type: String },
+  { name: 'workspace', alias: 'w', type: String, multiple: true },
+  { name: 'package', alias: 'p', type: String, multiple: true },
+  { name: 'max-version-diff', alias: 'm', type: String },
   { name: 'test', type: String },
   { name: 'pre-update', type: String },
 ]
