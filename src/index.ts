@@ -3,7 +3,6 @@
 import fs from 'node:fs/promises'
 import { checkbox, Separator } from '@inquirer/prompts'
 import commandLineArgs from 'command-line-args'
-import commandLineUsage from 'command-line-usage'
 import type Update from './types/update'
 import applyUpdate from './utils/apply_update'
 import commitUpdate from './utils/commit_update'
