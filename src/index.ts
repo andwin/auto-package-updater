@@ -133,6 +133,9 @@ const run = async () => {
       continue
     }
 
+    if (choices.length) {
+      choices.push(new Separator(' '))
+    }
     if (workspace.name) {
       choices.push(new Separator(workspace.name))
     }
