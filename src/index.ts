@@ -6,6 +6,7 @@ import chalk from 'chalk'
 import commandLineArgs from 'command-line-args'
 import type Update from './types/update'
 import applyUpdate from './utils/apply_update'
+import commandLineArgsDefinitions from './utils/command_linke_args_definitions'
 import commitUpdate from './utils/commit_update'
 import detectPackageManager from './utils/detect_package_panager'
 import displayHelp, {
@@ -24,52 +25,6 @@ import runTests from './utils/run_tests'
 import verifyGitRepo from './utils/verify_git_repo'
 import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
 import verifyPristineState from './utils/verify_pristine_state'
-
-const commandLineArgsDefinitions: OptionDefinitionWithDescription[] = [
-  {
-    name: 'help',
-    alias: 'h',
-    type: Boolean,
-    description: 'Display this usage guide.',
-  },
-  {
-    name: 'debug',
-    alias: 'd',
-    type: Boolean,
-    defaultValue: false,
-    description: 'Enable debug mode.',
-  },
-  {
-    name: 'workspace',
-    alias: 'w',
-    type: String,
-    multiple: true,
-    description: 'Filter updates by workspace name.',
-  },
-  {
-    name: 'package',
-    alias: 'p',
-    type: String,
-    multiple: true,
-    description: 'Filter updates by package name.',
-  },
-  {
-    name: 'max-version-diff',
-    alias: 'm',
-    type: String,
-    description: 'Filter updates by maximum version difference.',
-  },
-  {
-    name: 'test',
-    type: String,
-    description: 'Custom command to run tests after updating packages.',
-  },
-  {
-    name: 'pre-update',
-    type: String,
-    description: 'Custom command to run before updating packages.',
-  },
-]
 
 const commandLineArguments = commandLineArgs(commandLineArgsDefinitions)
 
