@@ -32,16 +32,16 @@ npx auto-package-updater [options]
 
 ```bash
 # Update all packages interactively
-auto-package-updater
+npx auto-package-updater
 
 # Only patch updates in a specific workspace and a with max version diff of patch
-auto-package-updater -w admin -m patch
+npx auto-package-updater -w admin -m patch
 
 # Use a custom test command
-auto-package-updater --test "npm run test:ci"
+npx auto-package-updater --test "npm run test:ci"
 
 # Filter for specific packages
-auto-package-updater -p sass -p dayjs
+npx auto-package-updater -p sass -p dayjs
 ```
 
 ## Development
