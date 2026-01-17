@@ -43,3 +43,20 @@ auto-package-updater --test "npm run test:ci"
 # Filter for specific packages
 auto-package-updater -p sass -p dayjs
 ```
+
+## Development
+
+```bash
+# Bump version
+pnpm version <patch|minor|major>
+
+# Publish
+pnpm test
+pnpm build
+pnpm publish
+
+# Link
+pnpm link --global
+pnpm remove --global auto-package-updater
+pnpm list --global
+```
