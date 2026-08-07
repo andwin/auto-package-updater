@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises'
+import type CommandError from '../types/command_error'
 import type Update from '../types/update'
 import describeUpdate from './describe_update'
 
@@ -8,10 +9,7 @@ export const clear = async () => {
   await fs.unlink(logfile).catch(() => {})
 }
 
-export const log = async (
-  updates: Update[],
-  error: Error & { stdout?: string; stderr?: string },
-) => {
+export const log = async (updates: Update[], error: CommandError) => {
   const packages = updates.map(describeUpdate).join(', ')
 
   let logMessage = `❌ Updating ${packages} failed`

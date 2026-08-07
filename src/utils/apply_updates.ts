@@ -1,3 +1,4 @@
+import type CommandError from '../types/command_error'
 import type PackageManager from '../types/package_manager'
 import type Update from '../types/update'
 import applyUpdate from './apply_update'
@@ -57,7 +58,7 @@ const applyBatch = async (
 
     await commitUpdates(batch)
   } catch (e) {
-    const error = e as Error & { stdout?: string; stderr?: string }
+    const error = e as CommandError
     logger.error(`❌ ${error.message}`)
 
     await fileLogger.log(batch, error)
