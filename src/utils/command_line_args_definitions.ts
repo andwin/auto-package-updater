@@ -71,7 +71,7 @@ const commandLineArgsDefinitions: OptionDefinitionWithDescription[] = [
     type: String,
     multiple: true,
     description:
-      'Comma separated packages to update together in a single batch when selected for the same workspace.',
+      'Comma separated packages to update together in a single batch when selected for the same workspace. Ignored when --combine is used, since that already applies every update as one batch.',
   },
 ]
 

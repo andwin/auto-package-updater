@@ -30,7 +30,7 @@ npx patchup [options]
 | `--pre-update <command>` | | Custom command to run before updating packages |
 | `--auto` | `-a` | Automatically apply all updates matching the filters |
 | `--combine` | `-c` | Apply all updates together, run the tests once, and commit as a single commit |
-| `--group <packages>` | `-g` | Comma separated packages to update together (can be used multiple times) |
+| `--group <packages>` | `-g` | Comma separated packages to update together (can be used multiple times). Ignored when `--combine` is used |
 
 ### Examples
 
