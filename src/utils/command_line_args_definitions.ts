@@ -65,6 +65,14 @@ const commandLineArgsDefinitions: OptionDefinitionWithDescription[] = [
     description:
       'Apply all updates together, run the tests once, and commit as a single commit.',
   },
+  {
+    name: 'group',
+    alias: 'g',
+    type: String,
+    multiple: true,
+    description:
+      'Comma separated packages to update together in a single batch when selected for the same workspace.',
+  },
 ]
 
 export default commandLineArgsDefinitions

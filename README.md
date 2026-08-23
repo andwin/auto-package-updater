@@ -10,6 +10,7 @@ Automatically update npm packages one at a time, running tests after each update
 - Supports npm and pnpm workspaces
 - Interactive package selection
 - Filter by workspace, package name, or version diff (patch/minor/major)
+- Update related packages together in a single batch
 
 ## Usage
 
@@ -29,6 +30,7 @@ npx patchup [options]
 | `--pre-update <command>` | | Custom command to run before updating packages |
 | `--auto` | `-a` | Automatically apply all updates matching the filters |
 | `--combine` | `-c` | Apply all updates together, run the tests once, and commit as a single commit |
+| `--group <packages>` | `-g` | Comma separated packages to update together (can be used multiple times) |
 
 ### Examples
 
@@ -47,6 +49,9 @@ npx patchup -p sass -p dayjs
 
 # Apply all updates together and run the tests just once
 npx patchup -a -c
+
+# Update react and react-dom together in a single commit
+npx patchup -g "react,react-dom"
 ```
 
 ## Development

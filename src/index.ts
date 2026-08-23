@@ -12,8 +12,10 @@ import installPackagesBeforeUpdate from './utils/install_packages'
 import listWorkspaces from './utils/list_workspaces'
 import { enableDebug, logger } from './utils/logger'
 import packageVersion from './utils/package_version'
+import parseGroups from './utils/parse_groups'
 import selectUpdates from './utils/select_updates'
 import verifyGitRepo from './utils/verify_git_repo'
+import { verifyGroups } from './utils/verify_groups'
 import { verifyMaxVersionDiff } from './utils/verify_max_version_diff'
 import verifyPristineState from './utils/verify_pristine_state'
 
@@ -28,6 +30,7 @@ const customCommands = {
   test: commandLineArguments.test,
   preUpdate: commandLineArguments['pre-update'],
 }
+const groups = parseGroups(commandLineArguments.group)
 
 const run = async () => {
   if (commandLineArguments.help) {
@@ -46,6 +49,7 @@ const run = async () => {
   await verifyGitRepo()
   await verifyPristineState()
   verifyMaxVersionDiff(filter.maxVersionDiff)
+  verifyGroups(groups)
   const packageManager = await detectPackageManager()
   logger.debug('Detected package manager', packageManager)
 
@@ -61,6 +65,7 @@ const run = async () => {
 
   logger.debug('Packages filter', filter.packages)
   logger.debug('Max version diff filter', filter.maxVersionDiff)
+  logger.debug('Groups', groups)
 
   if (!filteredWorkspaces.length) {
     logger.error('No matching workspaces found')
@@ -93,6 +98,7 @@ const run = async () => {
     updatesToApply,
     customCommands,
     commandLineArguments.combine,
+    groups,
   )
 }
 

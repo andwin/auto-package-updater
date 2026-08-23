@@ -2,6 +2,7 @@ import type CommandError from '../types/command_error'
 import type PackageManager from '../types/package_manager'
 import type Update from '../types/update'
 import applyUpdate from './apply_update'
+import buildBatches from './build_batches'
 import commitUpdates from './commit_updates'
 import describeUpdate from './describe_update'
 import * as fileLogger from './file_logger'
@@ -20,8 +21,9 @@ const applyUpdates = async (
   updates: Update[],
   customCommands: CustomCommands,
   combine: boolean,
+  groups: string[][],
 ): Promise<void> => {
-  const batches = combine ? [updates] : updates.map((update) => [update])
+  const batches = buildBatches(updates, combine, groups)
 
   for (const batch of batches) {
     await applyBatch(packageManager, batch, customCommands)
