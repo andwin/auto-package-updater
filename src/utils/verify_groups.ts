@@ -9,6 +9,13 @@ export const verifyGroups = (groups: string[][]) => {
       process.exit(1)
     }
 
+    if (new Set(group).size !== group.length) {
+      console.error(
+        `Invalid --group: "${group.join(',')}" lists the same package more than once`,
+      )
+      process.exit(1)
+    }
+
     for (const packageName of group) {
       if (seenPackages.has(packageName)) {
         console.error(
